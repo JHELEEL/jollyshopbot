@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Telegram Shop Bot - Main Entry Point
-A fully automated shop bot with admin panel
+A fully automated shop bot with admin panel and delivery system
 """
 
 import logging
@@ -21,7 +21,8 @@ from handlers import (
     admin_menu,
     add_product_start,
     handle_text_input,
-    view_orders,
+    view_pending_orders,
+    approve_order,
     list_products,
     back_to_menu,
 )
@@ -51,7 +52,8 @@ def main():
     application.add_handler(CallbackQueryHandler(confirm_purchase, pattern=r'^confirm_\d+$'))
     application.add_handler(CallbackQueryHandler(admin_menu, pattern='admin_menu'))
     application.add_handler(CallbackQueryHandler(add_product_start, pattern='add_product'))
-    application.add_handler(CallbackQueryHandler(view_orders, pattern='view_orders'))
+    application.add_handler(CallbackQueryHandler(view_pending_orders, pattern='view_pending_orders'))
+    application.add_handler(CallbackQueryHandler(approve_order, pattern=r'^approve_order_\d+$'))
     application.add_handler(CallbackQueryHandler(list_products, pattern='list_products'))
     application.add_handler(CallbackQueryHandler(back_to_menu, pattern='home'))
     application.add_handler(CallbackQueryHandler(show_products, pattern='back_to_products'))
